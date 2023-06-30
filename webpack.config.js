@@ -1,6 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const WatchExternalFilesPlugin = () => {
+    WatchExternalFilesPlugin.prototype.apply = (compiler) => {
+      compiler.plugin('after-compile', (compilation, callback) => {
+        ['./templates', './config', './modules'].forEach(path => compilation.contextDependencies.add(path));
+        callback();
+      });
+    };
+  };
+
 module.exports = (env, argv) => {
     const config = {
         entry: './src/index.js',
@@ -10,9 +19,12 @@ module.exports = (env, argv) => {
         },
         devServer: {
             contentBase: './dist',
+            historyApiFallback: {
+                index: './uwu.html',
+              },
             hot: true,
         },
-        plugins: []
+        plugins: [new WatchExternalFilesPlugin()]
     };
 
     if (argv.mode === 'development') {

@@ -1,11 +1,11 @@
-const NEEDLE_CLASS = 'needle';
+const NEEDLE_CLASS = '3412';
 
 const fir = {
     container: document.getElementById('tree'),
     getNeedles: function() {
         return this.container.getElementsByClassName(NEEDLE_CLASS);
     },
-    rowsCount: 20,
+    rowsCount: 23,
     draw: function() {
         let output = '';
 
@@ -26,3 +26,4 @@ const fir = {
 fir.draw();
 
 export default fir;
+// module.hot.decline();
